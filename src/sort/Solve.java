@@ -6,7 +6,7 @@ public class Solve {
 	public static void main(String[] args) {
 		Solve s = new Solve();
 		int[] nums = new int[] { 1, 2, 3, 5, 2, 3 };
-		s.shellSort(nums, 6);
+		s.countingSort(nums, 6);
 		for (int i : nums) {
 			System.out.print(i + "\t");
 		}
@@ -177,7 +177,7 @@ public class Solve {
 			}
 		}
 	}
-	/********************************** 堆排序 **********************************************/
+	/********************************** 希尔排序 **********************************************/
 	public int[] shellSort(int[] A, int n) {
 		if(A == null || n == 0){
 			return A;
@@ -193,6 +193,31 @@ public class Solve {
 				}
 			}
 		}
+		return A;
+    }
+	/****************************************计数排序*******************************************/
+	public int[] countingSort(int[] A, int n) {
+		if(A == null || n == 0){
+			return A;
+		}
+		int max = A[0];
+		for(int i = 1; i < n; i++){
+			if(A[i] > max){
+				max = A[i];
+			}
+		}
+		int[] temp = new int[max + 1];
+		for(int i = 0; i < n; i++){
+			temp[A[i]]++;
+		}
+		int k = 0;
+		for(int i = 0; i < temp.length; i++){
+			while(temp[i]  > 0){
+				A[k++] = i;
+				temp[i]--;
+			}
+		}
+		
 		return A;
     }
 }
